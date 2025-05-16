@@ -1,0 +1,36 @@
+syntax = "proto3";
+
+package course;
+
+service CourseService {
+  rpc ListCourses (Empty) returns (CourseList);
+  rpc GetCourseById (CourseRequest) returns (Course);
+  rpc EnrollInCourse (EnrollRequest) returns (EnrollResponse);
+  rpc ValidateCourse (EnrollRequest) returns (EnrollResponse); // ✅ Très important
+}
+
+message Empty {}
+
+message CourseRequest {
+  int32 id = 1;
+}
+
+message Course {
+  int32 id = 1;
+  string name = 2;
+  string description = 3;
+  repeated int32 prerequisites = 4;
+}
+
+message CourseList {
+  repeated Course courses = 1;
+}
+
+message EnrollRequest {
+  int32 course_id = 1;
+  int32 user_id = 2;
+}
+
+message EnrollResponse {
+  string message = 1;
+}

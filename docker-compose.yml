@@ -1,0 +1,45 @@
+version: '3.8'
+
+services:
+  courseservice:
+    build: ./courseservice
+    ports:
+      - "50052:50051"
+    volumes:
+      - ./courseservice:/app
+      - /app/node_modules
+    environment:
+      - NODE_ENV=development
+
+  userservice:
+    build: ./userservice
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./userservice:/app
+      - /app/node_modules
+    environment:
+      - NODE_ENV=development
+
+  trackingservice:
+    build: ./trackingservice
+    ports:
+      - "3002:3002"
+    volumes:
+      - ./trackingservice:/app
+      - /app/node_modules
+    environment:
+      - NODE_ENV=development
+
+  aimodelservice:
+    build: ./aimodelservice
+    ports:
+      - "5000:5000"
+    volumes:
+      - ./aimodelservice:/app
+    environment:
+      - FLASK_ENV=development
+
+networks:
+  default:
+    driver: bridge 
